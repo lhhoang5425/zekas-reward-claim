@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zekas Ultimate Pro — Hoàn tất phiên chạy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg1: #07111f;
+      --bg2: #0a1730;
+      --panel: rgba(15, 25, 46, 0.82);
+      --panel-2: rgba(18, 31, 57, 0.94);
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #edf4ff;
+      --muted: #a4b4d5;
+      --soft: #7f91b6;
+      --accent: #48a7ff;
+      --accent2: #63d1ff;
+      --green: #72dfa7;
+      --yellow: #ffd36f;
+      --shadow: 0 18px 48px rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+    }
+
+    body {
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 20%, rgba(72, 167, 255, .16), transparent 26%),
+        radial-gradient(circle at 85% 24%, rgba(99, 209, 255, .08), transparent 18%),
+        radial-gradient(circle at 75% 82%, rgba(255, 211, 111, .06), transparent 22%),
+        linear-gradient(180deg, var(--bg2) 0%, var(--bg1) 100%);
+      overflow-x: hidden;
+    }
+
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 999px;
+      opacity: .58;
+      animation: float linear infinite;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(105vh) rotate(0deg);
+      }
+
+      to {
+        transform: translateY(-12vh) rotate(720deg);
+      }
+    }
+
+    .shell {
+      position: relative;
+      z-index: 1;
+      width: min(920px, calc(100% - 24px));
+      margin: 14px auto;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(13, 24, 47, .9), rgba(6, 14, 32, .94));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, .07);
+      background: linear-gradient(180deg, rgba(255, 255, 255, .03), transparent);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(72, 167, 255, .28), rgba(72, 167, 255, .12));
+      border: 1px solid rgba(255, 255, 255, .08);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 1.12rem;
+      font-weight: 800;
+      letter-spacing: -.03em;
+    }
+
+    .brand-subtitle {
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: .84rem;
+    }
+
+    .top-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 38px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid rgba(255, 255, 255, .07);
+      color: #d7e3ff;
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 1.2fr .92fr;
+      gap: 16px;
+      padding: 18px;
+      align-items: start;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 16px;
+      align-items: center;
+      min-width: 0;
+      padding-top: 4px;
+    }
+
+    .success-wrap {
+      position: relative;
+      width: 96px;
+      height: 96px;
+      margin: 0 auto;
+    }
+
+    .ring,
+    .ring2 {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 4px solid transparent;
+    }
+
+    .ring {
+      border-top-color: var(--accent);
+      border-right-color: var(--accent2);
+      animation: spin 3.2s linear infinite;
+    }
+
+    .ring2 {
+      inset: 8px;
+      border-left-color: var(--green);
+      border-bottom-color: var(--yellow);
+      animation: spin 2.3s linear infinite reverse;
+    }
+
+    .core {
+      position: absolute;
+      inset: 20px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #2c9eff 0%, #48c5ff 42%, #68d7a5 100%);
+      box-shadow: 0 0 0 7px rgba(72, 167, 255, .08), 0 0 32px rgba(72, 167, 255, .18);
+      font-size: 2rem;
+      font-weight: 900;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .eyebrow {
+      color: var(--muted);
+      font-size: .73rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      margin-bottom: 6px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      line-height: .96;
+      letter-spacing: -.05em;
+      font-weight: 900;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .96rem;
+      line-height: 1.5;
+      max-width: 500px;
+    }
+
+    .summary-inline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-top: 14px;
+      font-size: .93rem;
+      font-weight: 700;
+    }
+
+    .summary-inline .dot {
+      opacity: .35;
+    }
+
+    .side {
+      display: grid;
+      gap: 12px;
+    }
+
+    .panel {
+      padding: 18px 20px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, .02));
+      border: 1px solid rgba(255, 255, 255, .08);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .04);
+    }
+
+    .panel-title {
+      color: var(--soft);
+      font-size: .82rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      margin-bottom: 10px;
+    }
+
+    .time-big {
+      font-size: clamp(2rem, 3vw, 3rem);
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -.05em;
+      margin-bottom: 8px;
+    }
+
+    .panel-sub {
+      color: #d9e5fb;
+      font-size: .94rem;
+      line-height: 1.45;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      padding: 0 18px;
+    }
+
+    .stat {
+      min-height: 132px;
+      padding: 18px 18px 16px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .02));
+      border: 1px solid rgba(255, 255, 255, .08);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .stat-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      background: rgba(255, 255, 255, .06);
+      margin-bottom: 14px;
+      font-size: 1.2rem;
+    }
+
+    .stat-value {
+      font-size: clamp(1.55rem, 2.2vw, 2rem);
+      line-height: 1.14;
+      letter-spacing: -.04em;
+      font-weight: 900;
+      word-break: break-word;
+    }
+
+    .stat-label {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: .95rem;
+      font-weight: 600;
+    }
+
+    .callout {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 16px 18px 0;
+      padding: 18px 20px;
+      border-radius: 20px;
+      background: linear-gradient(90deg, rgba(72, 167, 255, .12), rgba(99, 209, 255, .07));
+      border: 1px solid rgba(72, 167, 255, .22);
+    }
+
+    .callout .emoji {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+    }
+
+    .callout p {
+      margin: 0;
+      color: #d9e5fb;
+      font-size: .95rem;
+      line-height: 1.52;
+    }
+
+    .callout strong {
+      color: #93d2ff;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 20px 18px 16px;
+    }
+
+    .btn {
+      min-width: 172px;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, .09);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+      font: inherit;
+      font-size: .98rem;
+      font-weight: 800;
+      color: #f7fbff;
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #309eff 0%, #45b9ff 45%, #68d6a4 100%);
+      box-shadow: 0 12px 28px rgba(47, 158, 255, .28);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, .05);
+      color: #e6eeff;
+    }
+
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 14px 18px 18px;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      color: var(--soft);
+      font-size: .9rem;
+    }
+
+    .footer a {
+      color: #8bc8ff;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 980px) {
+      .content {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .shell {
+        width: calc(100% - 14px);
+        margin: 8px auto;
+        border-radius: 18px;
+      }
+
+      .topbar,
+      .content,
+      .stats,
+      .actions,
+      .footer {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .content {
+        padding-top: 16px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .summary-inline {
+        justify-content: center;
+      }
+
+      .top-meta {
+        justify-content: flex-start;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .callout {
+        margin-left: 14px;
+        margin-right: 14px;
+        align-items: flex-start;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="particles" id="particles"></div>
+
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-icon">⚡</div>
+        <div>
+          <div class="brand-title">Zekas Ultimate Pro</div>
+          <div class="brand-subtitle">Phiên tìm kiếm đã hoàn tất thành công</div>
+        </div>
+      </div>
+      <div class="top-meta">
+        <div class="chip"><span>🕒</span><span id="nowClock">--:--:--</span></div>
+        <div class="chip"><span>🌍</span><span id="topTimezone">Đang lấy timezone...</span></div>
+      </div>
+    </header>
+
+    <section class="content">
+      <div class="hero">
+        <div class="success-wrap">
+          <div class="ring"></div>
+          <div class="ring2"></div>
+          <div class="core">✓</div>
+        </div>
+        <div>
+          <div class="eyebrow">SEARCH SESSION COMPLETE</div>
+          <h1>Hoàn thành! 🎉</h1>
+          <p>Tất cả các lượt tìm kiếm đã được thực hiện thành công.</p>
+          <div class="summary-inline">
+            <span><span id="summaryTotal">0</span> lượt</span>
+            <span class="dot">•</span>
+            <span id="summaryMode">Đang tải...</span>
+            <span class="dot">•</span>
+            <span id="summaryDuration">0s</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="side">
+        <section class="panel">
+          <div class="panel-title">SEARCH XONG LÚC</div>
+          <div class="time-big" id="completedAt">--:--:--</div>
+          <div class="panel-sub" id="completedDate">--</div>
+          <div class="panel-sub" id="timeSource">Đang lấy múi giờ...</div>
+        </section>
+        <section class="panel">
+          <div class="panel-title">BẮT ĐẦU SEARCH LÚC</div>
+          <div class="time-big" id="startedAt">--:--:--</div>
+          <div class="panel-sub" id="startedDate">--</div>
+          <div class="panel-sub" id="startedSource">Theo thời gian phiên search</div>
+        </section>
+      </aside>
+    </section>
+
+    <section class="stats">
+      <article class="stat">
+        <div class="stat-icon">🔎</div>
+        <div>
+          <div class="stat-value" id="totalSearches">0</div>
+          <div class="stat-label">Lượt tìm kiếm</div>
+        </div>
+      </article>
+      <article class="stat">
+        <div class="stat-icon">💻</div>
+        <div>
+          <div class="stat-value" id="mode">Desktop</div>
+          <div class="stat-label">Chế độ</div>
+        </div>
+      </article>
+      <article class="stat">
+        <div class="stat-icon">⏱️</div>
+        <div>
+          <div class="stat-value" id="duration">0s</div>
+          <div class="stat-label">Thời gian</div>
+        </div>
+      </article>
+      <article class="stat">
+        <div class="stat-icon">⚡</div>
+        <div>
+          <div class="stat-value" id="avgSpeed">--</div>
+          <div class="stat-label">Tốc độ trung bình</div>
+        </div>
+      </article>
+    </section>
+
+
+    <section class="callout">
+      <div class="emoji">🏆</div>
+      <p>Kiểm tra <strong>Microsoft Rewards</strong> để xem điểm đã được cộng. Thường mất 1–2 phút để đồng bộ sau khi
+        phiên tìm kiếm hoàn tất.</p>
+    </section>
+
+    <div class="actions">
+      <a href="https://rewards.bing.com/" target="_blank" class="btn btn-primary">🏆 Xem Rewards</a>
+      <button class="btn btn-secondary" id="closeBtn">✕ Đóng tab</button>
+    </div>
+
+    <footer class="footer">
+      <div><span id="footerBrand">Zekas Ultimate Pro</span> • <span id="footerVersion">v2.5.0</span> • Bản quyền Zekas</div>
+    </footer>
+  </main>
+
+  <script src="done.js"></script>
+</body>
+
+</html>

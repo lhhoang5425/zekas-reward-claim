@@ -1,9 +1,9 @@
 {
     "manifest_version": 3,
-    "name": "Zekas Rewards Ultimate Pro",
-    "version": "2.5.0",
+    "name": "Zekas Reward Claim",
+    "version": "2.5.1",
     "author": "Zekas",
-    "description": "Siêu tiện ích cày điểm Microsoft Rewards độc quyền Zekas: Hỗ trợ PC + Mobile (iOS Fake), Tự động cày Daily Set, Bypass SSO Passkey, chống rò rỉ WebRTC và bảo mật ngoại tuyến 100%.",
+    "description": "Zekas Reward Claim - Tiện ích cày Bing Rewards tự động độc quyền: PC + Mobile, Daily Set, Bypass SSO Passkey, chống rò rỉ WebRTC và bảo mật ngoại tuyến 100%.",
     "permissions": [
         "tabs",
         "storage",

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zekas Rewards Ultimate Pro</title>
+    <title>Zekas Reward Claim</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -22,8 +22,7 @@
                     </svg>
                 </div>
                 <div>
-                    <h1 class="app-title" style="background: linear-gradient(135deg, #a78bfa 0%, #38bdf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Zekas Ultimate Pro</h1>
-                    <p class="app-subtitle">Cày Bing Rewards Độc Quyền Zekas</p>
+                    <h1 class="app-title" style="background: linear-gradient(135deg, #a78bfa 0%, #38bdf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Zekas Reward Claim</h1>
                 </div>
             </div>
             <div class="status-badge" id="statusBadge">
@@ -69,7 +68,6 @@
                     <label class="setting-label" for="searchCount">
                         <span id="searchCountLabel">Số lần tìm kiếm</span>
                     </label>
-                    <span class="setting-desc" id="searchCountDesc">Tổng số lượt search trên Bing</span>
                 </div>
                 <div class="setting-control">
                     <button class="btn-adjust" id="searchCountDown">−</button>
@@ -83,7 +81,6 @@
                     <label class="setting-label" for="mobileSearchCount">
                         📱 Số lần Mobile
                     </label>
-                    <span class="setting-desc">Số lượt search mobile (sau desktop)</span>
                 </div>
                 <div class="setting-control">
                     <button class="btn-adjust" id="mobileCountDown">−</button>
@@ -96,7 +93,6 @@
             <div class="setting-item">
                 <div class="setting-info">
                     <label class="setting-label">⏱ Delay tìm kiếm (giây)</label>
-                    <span class="setting-desc">Random trong khoảng — tránh bị phát hiện</span>
                 </div>
                 <div class="setting-control range-control">
                     <button class="btn-adjust" id="searchDelayMinDown">−</button>
@@ -114,7 +110,6 @@
             <div class="setting-item">
                 <div class="setting-info">
                     <label class="setting-label">🗂 Đóng tab sau (giây)</label>
-                    <span class="setting-desc">Random trong khoảng — giả lập đọc trang</span>
                 </div>
                 <div class="setting-control range-control">
                     <button class="btn-adjust" id="tabCloseDelayMinDown">−</button>
@@ -245,7 +240,6 @@
             <div class="setting-item ratio-item hidden" id="ratioItem">
                 <div class="setting-info">
                     <label class="setting-label">📊 Tỉ lệ VN : EN</label>
-                    <span class="setting-desc">Ví dụ 7:3 = 70% VN, 30% EN</span>
                 </div>
                 <div class="setting-control range-control">
                     <span style="font-size: 12px; color: #888;">🇻🇳</span>
@@ -341,13 +335,24 @@
             </button>
         </div>
 
-        <!-- Footer -->
-        <div class="footer">
-            <span style="color: #38bdf8; font-weight: 600;">⚡ Zekas Ultimate Pro v2.5</span>
-            <span>•</span>
-            <span id="keywordPoolInfo">Kho: đang tải...</span>
-            <span>•</span>
-            <span style="color: #10b981;">Bản quyền Zekas</span>
+        <!-- Hidden helper for script safety -->
+        <span id="keywordPoolInfo" style="display: none;"></span>
+
+        <!-- Custom Confirmation Modal -->
+        <div class="custom-modal-backdrop hidden" id="customModal">
+            <div class="custom-modal-card">
+                <div class="modal-icon-wrapper" id="modalIcon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M15 16h4v2h-4v-2zm0-8h7v2h-7V8zm0 4h6v2h-6v-2zM3 18c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2V8H3v10zM14 5h-3l-1-1H6L5 5H2v2h12V5z" fill="currentColor"/>
+                    </svg>
+                </div>
+                <h3 class="modal-title" id="modalTitle">Xác nhận dọn rác Cache</h3>
+                <p class="modal-message" id="modalMessage">Xóa sạch toàn bộ Cookie và bộ nhớ đệm Bing để giải phóng dung lượng và chống phát hiện.</p>
+                <div class="modal-actions">
+                    <button class="modal-btn modal-btn-cancel" id="modalCancelBtn">Huỷ</button>
+                    <button class="modal-btn modal-btn-confirm" id="modalConfirmBtn">Dọn dẹp ngay</button>
+                </div>
+            </div>
         </div>
     </div>
 

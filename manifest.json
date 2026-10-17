@@ -3,7 +3,7 @@
     "name": "Zekas Reward Claim",
     "version": "2.5.1",
     "author": "Zekas",
-    "description": "Zekas Reward Claim - Tiện ích cày Bing Rewards tự động độc quyền: PC + Mobile, Daily Set, Bypass SSO Passkey, chống rò rỉ WebRTC và bảo mật ngoại tuyến 100%.",
+    "description": "Tự động cày và claim điểm Microsoft Rewards.",
     "permissions": [
         "tabs",
         "storage",
